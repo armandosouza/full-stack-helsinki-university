@@ -7,3 +7,4 @@ Exercise | Link
 :-- | :--:
 Exercise 0.4 - Create a new sequence diagram | [here](./part0/exercise0-4.md)
 Exercise 0.5 - Create a sequence diagram for SPA page | [here](./part0/exercise0-5.md)
+Exercise 0.6 - Create a sequence diagram for a new post on SPA page | [here](./part0/exercise0-6.md)
