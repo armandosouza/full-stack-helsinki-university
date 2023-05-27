@@ -12,4 +12,6 @@ Exercise 0.6 - Create a sequence diagram for a new post on SPA page | [here](./p
 ### Part 1:
 Exercise | Link
 :-- | :--:
-Exercise 1.1 to 1.6 - Course Information | [here](./part1)
+Exercise 1.1 to 1.6 - Course Information | [here](./part1/courseinfo)
+Exercise 1.7 to 1.11 - Unicafe | [here](./part1/unicafe)
+Exercise 1.12 to 1.14 - Anecdotes | [here](./part1/anecdotes)
