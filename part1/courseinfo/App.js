@@ -29,7 +29,7 @@ const Total = (props) => {
 const App = () => {
   const course = {
     name: 'Desenvolvimento de aplicação Half Stack',
-    parts = [
+    parts: [
       {
         name: 'Fundamentos da biblioteca React',
         exercises: 10
