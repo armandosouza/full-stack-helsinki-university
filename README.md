@@ -15,3 +15,8 @@ Exercise | Link
 Exercise 1.1 to 1.6 - Course Information | [here](./part1/courseinfo)
 Exercise 1.7 to 1.11 - Unicafe | [here](./part1/unicafe)
 Exercise 1.12 to 1.14 - Anecdotes | [here](./part1/anecdotes)
+
+### Part 2:
+Exercise | Link
+:-- | :--:
+Exercise 2.1 to 2.5 - Course Information (updated) | [here](./part2/courseinfo)
