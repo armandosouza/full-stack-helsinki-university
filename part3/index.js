@@ -1,10 +1,14 @@
 const express = require("express")
+const morgan = require("morgan")
 const app = express()
 
 let notes = require('./notes')
 
+morgan.token('content', function (request, response) { return JSON.stringify(request.body) })
+
 //middlewares
 app.use(express.json())
+app.use(morgan(':method :url :status :http-version - :response-time ms :content'))
 
 //get all persons
 app.get('/api/persons', (request, response) => {
