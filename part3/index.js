@@ -1,7 +1,10 @@
 const express = require("express")
 const app = express()
 
-const notes = require('./notes')
+let notes = require('./notes')
+
+//middlewares
+app.use(express.json())
 
 //get all persons
 app.get('/api/persons', (request, response) => {
@@ -21,13 +24,38 @@ app.get('/info', (request, response) => {
 //get unique person
 app.get('/api/persons/:id', (request, response) => {
 	const id = parseInt(request.params.id)
-	console.log(`Id da nota: ${id}`)
 	const note = notes.find(note => note.id === id)
-	console.log(note)
 	if(!note) {
 		return response.status(404).end()
 	}
 	response.json(note)
+})
+
+//add a new person
+app.post('/api/persons', (request, response) => {
+	const person = request.body
+
+	if(!person.name || !person.number) {
+		return response.status(400).json({
+			error: "Name and/or number are required!"
+		})
+	}
+
+	const findSameName = notes.find(note => note.name === person.name)
+	if(findSameName) {
+		return response.status(400).json({
+			error: "Name must be unique"
+		})
+	}
+
+	const id = Math.ceil(Math.random() * 100000000000000000)
+	const newPerson = {
+		name: person.name,
+		number: person.number,
+		id
+	}
+	notes = notes.concat(newPerson)
+	response.json(newPerson)
 })
 
 //delete unique person
