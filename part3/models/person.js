@@ -1,8 +1,7 @@
 const mongoose = require("mongoose")
+const url = process.env.MONGODB_URI
 
 mongoose.set("strictQuery", false)
-
-const url = process.env.MONGODB_URI
 
 console.log("connecting...")
 
@@ -14,10 +13,25 @@ mongoose.connect(url)
 		console.log("error connecting to MongoDB: ", error.message)
 })
 
+
 const personSchema = new mongoose.Schema({
-	name: String,
-	number: String
+	name: {
+		type: String,
+		minLength: 3,
+		required: true
+	},
+	number: {
+		type: String,
+		validate: {
+			validator: function (val) {
+				return /(\d\d|\d\d\d)[-]?(\d)+/.test(val)
+			}
+		},
+		required: true,
+		minLength: 8
+	}
 })
+
 
 personSchema.set('toJSON', {
 	transform: (document, returnedObject) => {
