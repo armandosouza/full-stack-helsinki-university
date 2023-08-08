@@ -1,18 +1,25 @@
+require("dotenv").config()
 const express = require("express")
 const morgan = require("morgan")
+const mongoose = require("mongoose")
+const cors = require("cors")
 const app = express()
 
-let notes = require('./notes')
+const Person = require("./models/person")
 
 morgan.token('content', function (request, response) { return JSON.stringify(request.body) })
 
 //middlewares
+app.use(express.static('build'))
 app.use(express.json())
 app.use(morgan(':method :url :status :http-version - :response-time ms :content'))
+app.use(cors())
 
 //get all persons
 app.get('/api/persons', (request, response) => {
-	response.json(notes)
+	Person.find({}).then(people => {
+		response.json(people)
+	})
 })
 
 //get info about persons
@@ -45,21 +52,14 @@ app.post('/api/persons', (request, response) => {
 		})
 	}
 
-	const findSameName = notes.find(note => note.name === person.name)
-	if(findSameName) {
-		return response.status(400).json({
-			error: "Name must be unique"
-		})
-	}
-
-	const id = Math.ceil(Math.random() * 100000000000000000)
-	const newPerson = {
+	const newPerson = new Person({
 		name: person.name,
 		number: person.number,
-		id
-	}
-	notes = notes.concat(newPerson)
-	response.json(newPerson)
+	})
+
+	newPerson.save().then(savedPerson => {
+		response.json(savedPerson)
+	})
 })
 
 //delete unique person
@@ -69,7 +69,7 @@ app.delete('/api/persons/:id', (request, response) => {
 	response.status(204).end()
 })
 
-const PORT = 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
 	console.log(`Servidor rodando em: http://localhost:${3001}`)
 })
