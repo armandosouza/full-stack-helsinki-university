@@ -20,3 +20,10 @@ Exercise 1.12 to 1.14 - Anecdotes | [here](./part1/anecdotes)
 Exercise | Link
 :-- | :--:
 Exercise 2.1 to 2.5 - Course Information (updated) | [here](./part2/courseinfo)
+Exercise 2.6 to 2.17 - Phonebook | [here](./part2/phonebook)
+Exercise 2.18 to 2.20 - Data for Countries | [here](./part2/countries)
+
+### Part 3:
+Exercise | Link
+:-- | :--:
+Exercise 3.1 to 3.14 - Phonebook (backend) | [here](./part3)
