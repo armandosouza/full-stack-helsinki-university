@@ -1,3 +1,5 @@
+var _ = require('lodash')
+
 const dummy = (blogs) => {
 	return 1
 }
@@ -23,4 +25,59 @@ const favoriteBlog = (blogs) => {
 	: 0
 }
 
-module.exports = { dummy, totalLikes, favoriteBlog }
+const mostBlogs = (blogs) => {
+	let blogsSortedByAuthor = _.countBy(blogs, 'author')
+	let result = Object.entries(blogsSortedByAuthor).sort((a, b) => { return b[1] - a[1] })
+	return {
+		"author" : result[0][0],
+		"blogs": result[0][1]
+	}
+}
+
+const mostLikes = (blogs) => {
+	let blogsSortedByLikes = _.reduce(blogs, (sum, n) => {
+		let arr = []
+		arr.push({
+			[n.author]: n.likes
+		})
+		return arr
+	}, [])
+	console.log(blogsSortedByLikes)
+}
+
+const listBlogs = [
+	{
+		_id: '5a422aa71b54a676234d17f1',
+		title: 'Go To Statement Considered Harmful',
+		author: 'Eger W. Dijkstra',
+		url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+		likes: 11,
+		__v: 0
+	},
+	{
+		_id: '5a422aa71b54a676234d17f8',
+		title: 'Go To Statement Considered Harmful',
+		author: 'Edsger W. Dijkstra',
+		url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+		likes: 5,
+		__v: 0
+	},
+	{
+		_id: '5a422aa71b54a676234d17f2',
+		title: 'Go To Statement Considered Harmful',
+		author: 'Edsger W. Dijkstra',
+		url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+		likes: 12,
+		__v: 0
+	},
+	{
+		_id: '5a422aa71b54a676234d17f1',
+		title: 'Go To Statement Considered Harmful',
+		author: 'Edsger W. Dijkstra',
+		url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+		likes: 11,
+		__v: 0
+	},
+]
+
+module.exports = { dummy, totalLikes, favoriteBlog, mostBlogs }
